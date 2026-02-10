@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon, Globe, Car } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, Sun, Moon, Globe, Car, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 export function Navbar() {
+  const { user, isAdmin, signOut } = useAuth();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
@@ -79,16 +82,29 @@ export function Navbar() {
             </Button>
 
             {/* Auth Buttons */}
-            <Link to="/login">
-              <Button variant="ghost" size="sm">
-                {t('nav.login')}
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button size="sm" className="btn-accent text-white">
-                {t('nav.register')}
-              </Button>
-            </Link>
+            {user ? (
+              <>
+                {isAdmin && (
+                  <Link to="/admin">
+                    <Button variant="ghost" size="sm" className="gap-1">
+                      <Shield className="w-4 h-4" /> Admin
+                    </Button>
+                  </Link>
+                )}
+                <Button variant="ghost" size="sm" onClick={() => { signOut(); navigate('/'); }}>
+                  {t('nav.logout')}
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="ghost" size="sm">{t('nav.login')}</Button>
+                </Link>
+                <Link to="/register">
+                  <Button size="sm" className="btn-accent text-accent-foreground">{t('nav.register')}</Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -151,16 +167,27 @@ export function Navbar() {
               </div>
 
               <div className="flex gap-3 pt-2">
-                <Link to="/login" className="flex-1" onClick={() => setIsOpen(false)}>
-                  <Button variant="outline" className="w-full">
-                    {t('nav.login')}
-                  </Button>
-                </Link>
-                <Link to="/register" className="flex-1" onClick={() => setIsOpen(false)}>
-                  <Button className="w-full btn-accent text-white">
-                    {t('nav.register')}
-                  </Button>
-                </Link>
+                {user ? (
+                  <>
+                    {isAdmin && (
+                      <Link to="/admin" className="flex-1" onClick={() => setIsOpen(false)}>
+                        <Button variant="outline" className="w-full gap-1"><Shield className="w-4 h-4" /> Admin</Button>
+                      </Link>
+                    )}
+                    <Button variant="outline" className="flex-1" onClick={() => { signOut(); navigate('/'); setIsOpen(false); }}>
+                      {t('nav.logout')}
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" className="flex-1" onClick={() => setIsOpen(false)}>
+                      <Button variant="outline" className="w-full">{t('nav.login')}</Button>
+                    </Link>
+                    <Link to="/register" className="flex-1" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full btn-accent text-accent-foreground">{t('nav.register')}</Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
