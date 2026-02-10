@@ -16,6 +16,7 @@ export function Navbar() {
     { to: '/', label: t('nav.home') },
     { to: '/cars', label: t('nav.cars') },
     { to: '/booking', label: t('nav.booking') },
+    { to: '/contact', label: t('contact.title') },
   ];
 
   const isActive = (path: string) => location.pathname === path;
