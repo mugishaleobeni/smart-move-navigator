@@ -14,16 +14,282 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          booking_date: string
+          booking_time: string | null
+          car_id: string | null
+          client_email: string | null
+          client_name: string
+          client_phone: string | null
+          created_at: string
+          driver: string | null
+          dropoff_location: string | null
+          duration_hours: number | null
+          id: string
+          notes: string | null
+          pickup_location: string
+          status: string
+          total_price: number | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          booking_date: string
+          booking_time?: string | null
+          car_id?: string | null
+          client_email?: string | null
+          client_name: string
+          client_phone?: string | null
+          created_at?: string
+          driver?: string | null
+          dropoff_location?: string | null
+          duration_hours?: number | null
+          id?: string
+          notes?: string | null
+          pickup_location: string
+          status?: string
+          total_price?: number | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          booking_date?: string
+          booking_time?: string | null
+          car_id?: string | null
+          client_email?: string | null
+          client_name?: string
+          client_phone?: string | null
+          created_at?: string
+          driver?: string | null
+          dropoff_location?: string | null
+          duration_hours?: number | null
+          id?: string
+          notes?: string | null
+          pickup_location?: string
+          status?: string
+          total_price?: number | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cars: {
+        Row: {
+          created_at: string
+          description: string | null
+          features: string[] | null
+          id: string
+          image: string | null
+          images: string[] | null
+          name: string
+          seats: number
+          status: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          features?: string[] | null
+          id?: string
+          image?: string | null
+          images?: string[] | null
+          name: string
+          seats?: number
+          status?: string
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          features?: string[] | null
+          id?: string
+          image?: string | null
+          images?: string[] | null
+          name?: string
+          seats?: number
+          status?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      expenses: {
+        Row: {
+          amount: number
+          car_id: string | null
+          created_at: string
+          description: string
+          expense_date: string
+          id: string
+        }
+        Insert: {
+          amount?: number
+          car_id?: string | null
+          created_at?: string
+          description: string
+          expense_date?: string
+          id?: string
+        }
+        Update: {
+          amount?: number
+          car_id?: string | null
+          created_at?: string
+          description?: string
+          expense_date?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean
+          message: string
+          title: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message: string
+          title: string
+          type?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          title?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      pricing_rules: {
+        Row: {
+          amount: number
+          car_id: string
+          created_at: string
+          id: string
+          location: string | null
+          notes: string | null
+          pricing_type: string
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          car_id: string
+          created_at?: string
+          id?: string
+          location?: string | null
+          notes?: string | null
+          pricing_type: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          car_id?: string
+          created_at?: string
+          id?: string
+          location?: string | null
+          notes?: string | null
+          pricing_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pricing_rules_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +416,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
