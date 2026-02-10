@@ -98,5 +98,18 @@
   "offline": {
     "banner": "Uri offline ubu",
     "pendingBookings": "Gufata gutegereje kuzashyirwa iyo uzongera guhuza"
+  },
+  "contact": {
+    "title": "Twandikire",
+    "subtitle": "Ufite ikibazo cyangwa ushaka gufata imodoka? Twandikire tuzagusubiza vuba.",
+    "sendMessage": "Twohereze Ubutumwa",
+    "message": "Ubutumwa",
+    "info": "Amakuru y'Ikigo",
+    "phone": "Telefone",
+    "email": "Imeli",
+    "address": "Aderesi",
+    "hours": "Amasaha y'Akazi",
+    "hoursValue": "Kuwa Mbere – Kuwa Gatandatu: 6:00 – 21:00",
+    "successMessage": "Ubutumwa bwawe bwoherejwe. Tuzagusubiza vuba!"
   }
 }

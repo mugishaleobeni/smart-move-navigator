@@ -98,5 +98,18 @@
   "offline": {
     "banner": "You are currently offline",
     "pendingBookings": "Pending bookings will be submitted when you reconnect"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have a question or want to book? Reach out and we'll get back to you shortly.",
+    "sendMessage": "Send Us a Message",
+    "message": "Message",
+    "info": "Business Information",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "hours": "Working Hours",
+    "hoursValue": "Mon – Sat: 6:00 AM – 9:00 PM",
+    "successMessage": "Your message has been sent. We'll get back to you soon!"
   }
 }
