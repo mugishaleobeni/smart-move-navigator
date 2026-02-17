@@ -8,9 +8,9 @@ import { cars } from '@/data/cars';
 import { Layout } from '@/components/layout/Layout';
 
 const heroImages = [
-  'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1920',
-  'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=1920',
-  'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=1920',
+  'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1200&q=80&auto=format',
+  'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=1200&q=80&auto=format',
+  'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=1200&q=80&auto=format',
 ];
 
 export default function Home() {
@@ -48,29 +48,29 @@ export default function Home() {
                 src={img}
                 alt={`Hero ${i + 1}`}
                 className="w-full h-full object-cover"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : 'auto'}
               />
             </motion.div>
           ))}
-          {/* Overlay - light: subtle, dark: strong */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-background dark:from-background/80 dark:via-background/50 dark:to-background" />
+          {/* Overlay - very minimal in light mode to keep photos visible */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent dark:from-background/90 dark:via-background/40 dark:to-background/20" />
         </div>
 
         {/* Content */}
-        <div className="relative h-full container mx-auto px-4 flex items-center">
+        <div className="relative h-full container mx-auto px-4 flex items-end pb-32">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-2xl"
           >
-            <div className="glass rounded-2xl p-6 md:p-8 mb-4 inline-block">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white dark:text-metallic drop-shadow-lg">
-                {t('home.heroTitle')}
-              </h1>
-              <p className="text-lg md:text-xl text-white/80 dark:text-muted-foreground max-w-lg">
-                {t('home.heroSubtitle')}
-              </p>
-            </div>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+              {t('home.heroTitle')}
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 max-w-lg drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)] mb-6">
+              {t('home.heroSubtitle')}
+            </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/booking">
                 <Button size="lg" className="btn-accent text-white text-lg px-8 h-14">
