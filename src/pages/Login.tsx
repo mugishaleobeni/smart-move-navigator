@@ -28,7 +28,8 @@ export default function Login() {
       toast({ title: 'Login failed', description: error.message, variant: 'destructive' });
     } else {
       toast({ title: 'Welcome back!' });
-      navigate('/admin');
+      // Small delay to ensure isAdmin state is set before navigating
+      setTimeout(() => navigate('/admin'), 100);
     }
   };
 
