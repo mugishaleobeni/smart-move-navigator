@@ -51,8 +51,8 @@ export default function Home() {
               />
             </motion.div>
           ))}
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background" />
+          {/* Overlay - light: subtle, dark: strong */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-background dark:from-background/80 dark:via-background/50 dark:to-background" />
         </div>
 
         {/* Content */}
@@ -63,12 +63,14 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-2xl"
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-metallic">{t('home.heroTitle')}</span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg">
-              {t('home.heroSubtitle')}
-            </p>
+            <div className="glass rounded-2xl p-6 md:p-8 mb-4 inline-block">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white dark:text-metallic drop-shadow-lg">
+                {t('home.heroTitle')}
+              </h1>
+              <p className="text-lg md:text-xl text-white/80 dark:text-muted-foreground max-w-lg">
+                {t('home.heroSubtitle')}
+              </p>
+            </div>
             <div className="flex flex-wrap gap-4">
               <Link to="/booking">
                 <Button size="lg" className="btn-accent text-white text-lg px-8 h-14">
