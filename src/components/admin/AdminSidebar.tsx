@@ -7,6 +7,8 @@ import {
   BarChart3,
   FileText,
   LogOut,
+  Trophy,
+  TrendingUp,
 } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -15,6 +17,7 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -28,7 +31,12 @@ const menuItems = [
   { title: 'Pricing', icon: DollarSign, to: '/admin/pricing' },
   { title: 'Bookings', icon: CalendarCheck, to: '/admin/bookings' },
   { title: 'Expenses', icon: Receipt, to: '/admin/expenses' },
+];
+
+const analyticsItems = [
   { title: 'Analytics', icon: BarChart3, to: '/admin/analytics' },
+  { title: 'Best Performers', icon: Trophy, to: '/admin/best-performers' },
+  { title: 'Income', icon: TrendingUp, to: '/admin/income' },
   { title: 'Reports', icon: FileText, to: '/admin/reports' },
 ];
 
@@ -57,6 +65,7 @@ export function AdminSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
+          <SidebarGroupLabel className="text-xs uppercase tracking-widest text-sidebar-foreground/50 px-3">Management</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
@@ -65,6 +74,33 @@ export function AdminSidebar() {
                     <NavLink
                       to={item.to}
                       end={item.to === '/admin'}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-3 py-2 rounded-lg transition-smooth ${
+                          isActive
+                            ? 'bg-accent text-accent-foreground font-medium'
+                            : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                        }`
+                      }
+                    >
+                      <item.icon className="w-4 h-4" />
+                      <span>{item.title}</span>
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-xs uppercase tracking-widest text-sidebar-foreground/50 px-3">Analytics</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {analyticsItems.map((item) => (
+                <SidebarMenuItem key={item.to}>
+                  <SidebarMenuButton asChild>
+                    <NavLink
+                      to={item.to}
                       className={({ isActive }) =>
                         `flex items-center gap-3 px-3 py-2 rounded-lg transition-smooth ${
                           isActive
