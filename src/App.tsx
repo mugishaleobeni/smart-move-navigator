@@ -24,6 +24,8 @@ const BookingsManagement = lazy(() => import("./pages/admin/BookingsManagement")
 const ExpensesManagement = lazy(() => import("./pages/admin/ExpensesManagement"));
 const Analytics = lazy(() => import("./pages/admin/Analytics"));
 const Reports = lazy(() => import("./pages/admin/Reports"));
+const BestPerformers = lazy(() => import("./pages/admin/BestPerformers"));
+const IncomeManagement = lazy(() => import("./pages/admin/IncomeManagement"));
 
 const queryClient = new QueryClient();
 
@@ -58,6 +60,8 @@ const App = () => (
                   <Route path="expenses" element={<Suspense fallback={<Loading />}><ExpensesManagement /></Suspense>} />
                   <Route path="analytics" element={<Suspense fallback={<Loading />}><Analytics /></Suspense>} />
                   <Route path="reports" element={<Suspense fallback={<Loading />}><Reports /></Suspense>} />
+                  <Route path="best-performers" element={<Suspense fallback={<Loading />}><BestPerformers /></Suspense>} />
+                  <Route path="income" element={<Suspense fallback={<Loading />}><IncomeManagement /></Suspense>} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>
